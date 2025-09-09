@@ -1,0 +1,28 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Environment variables
+backend-app/.env
+.env.local
+.env.*.local
+
+# Build outputs
+/build
+/dist
+/public/build
+
+# Logs
+*.log
+
+# IDE / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Coverage / Testing
+coverage/
+
