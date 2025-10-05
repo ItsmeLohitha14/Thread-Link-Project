@@ -16,6 +16,7 @@ import ProtectedRoute from "./components/ProtectedRoute"; // Role-based protecti
 import AdminDonations from "./pages/AdminDonations";
 import AdminUsers from "./pages/AdminUsers";
 import { CartProvider } from './contexts/CartContext';
+import AdminRequests from "./pages/AdminRequests";
 
 const App = () => {
   const location = useLocation();
@@ -26,6 +27,7 @@ const App = () => {
     "/admin-dashboard",
     "/admin/donations",
     "/admin/users",
+    "/admin/requests"
   ];
 
   const showNavbar = !noNavbarPaths.some(path =>
@@ -56,6 +58,7 @@ const App = () => {
           <Route path="/orphanage-dashboard" element={<OrphanageDashboard />} />
           <Route path="/admin/donations" element={<AdminDonations />} />
           <Route path="/admin/users" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
+          <Route path="/admin/requests" element={<ProtectedRoute role="Admin"><AdminRequests /></ProtectedRoute>} />
           
           {/* Admin Dashboard with Role Protection */}
           <Route

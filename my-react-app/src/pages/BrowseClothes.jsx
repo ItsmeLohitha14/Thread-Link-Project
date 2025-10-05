@@ -22,17 +22,22 @@ const BrowseClothes = () => {
   }, []);
 
   const fetchApprovedDonations = async () => {
-    try {
-      setLoading(true);
-      const data = await getApprovedDonations();
-      setDonations(data);
-    } catch (err) {
-      console.error("Error fetching approved donations", err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    setLoading(true);
+    const data = await getApprovedDonations();
+
+    // 🔥 Remove items with 0 quantity
+    const availableItems = data.filter(item => item.quantity > 0);
+
+    setDonations(availableItems);
+  } catch (err) {
+    console.error("Error fetching approved donations", err);
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const filteredDonations = donations.filter(donation => {
     const matchesSearch = donation.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

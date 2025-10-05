@@ -174,4 +174,28 @@ router.put("/:id/status", protect, async (req, res) => {
   }
 });
 
+
+// @desc    Delete orphanage request (Admin)
+// @route   DELETE /api/orphanage-requests/:id
+// @access  Private/Admin
+router.delete("/:id", protect, async (req, res) => {
+  try {
+    if (req.user.role !== "admin" && !req.user.isAdmin) {
+      return res.status(403).json({ message: "Not authorized as admin" });
+    }
+
+    const request = await OrphanageRequest.findById(req.params.id);
+    if (!request) {
+      return res.status(404).json({ message: "Request not found" });
+    }
+
+    await request.deleteOne();
+    res.json({ message: "Request deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting request:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 export default router;
